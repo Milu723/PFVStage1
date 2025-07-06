@@ -20,15 +20,23 @@ interface ChartData {
 export default function ExpensesChart() {
   const [chartData, setChartData] = useState<ChartData[]>([]);
 
-  useEffect(() => {
+ useEffect(() => {
   const fetchTransactions = async () => {
-    const res = await fetch("/api/transactions");
-    const data = await res.json();
-    processChartData(data);
+    try {
+      const res = await fetch("/api/transactions");
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
+      processChartData(data);
+    } catch (error) {
+      console.error("Failed to fetch transactions:", error);
+    }
   };
 
   fetchTransactions();
 }, []);
+
 
 
   const processChartData = (data: Transaction[]) => {

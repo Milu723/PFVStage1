@@ -2,18 +2,10 @@ import mongoose, { Schema, models } from 'mongoose';
 
 const transactionSchema = new Schema(
   {
-    amount: {
-      type: Number,
-      required: true,
-    },
-    date: {
-      type: Date,
-      required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
+    amount: { type: Number, required: true },
+    date: { type: Date, required: true },
+    description: { type: String, required: true },
+    category: { type: String, required: true },  // New Field
   },
   { timestamps: true }
 );

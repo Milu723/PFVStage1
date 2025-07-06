@@ -11,29 +11,9 @@ export async function GET() {
 
 // POST new transaction
 export async function POST(request: Request) {
-  const { amount, date, description } = await request.json();
+  const { amount, date, description, category } = await request.json();
   await connectToDatabase();
-  const transaction = new Transaction({ amount, date, description });
+  const transaction = new Transaction({ amount, date, description, category });
   await transaction.save();
   return NextResponse.json(transaction);
-}
-
-  // DELETE transaction by ID
-export async function DELETE(request: Request) {
-  const { id } = await request.json();
-  await connectToDatabase();
-  await Transaction.findByIdAndDelete(id);
-  return NextResponse.json({ message: "Transaction deleted" });
-}
-
-// updating transactions
-export async function PATCH(request: Request) {
-  const { id, amount, date, description } = await request.json();
-  await connectToDatabase();
-  const updatedTransaction = await Transaction.findByIdAndUpdate(
-    id,
-    { amount, date, description },
-    { new: true }
-  );
-  return NextResponse.json(updatedTransaction);
 }
