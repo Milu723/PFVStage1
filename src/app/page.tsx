@@ -1,17 +1,26 @@
 import TransactionForm from "@/components/TransactionForm";
-import TransactionList from "@/components/TransactionList";
 import ExpensesChart from "@/components/ExpensesChart";
-import CategoryPieChart from "@/components/CategoryPieChart";
+import TransactionList from "@/components/TransactionList";
+import BudgetForm from "@/components/BudgetForm";
+import BudgetComparison from "@/components/BudgetComparison";
 
 export default function Home() {
   return (
-    <main className="p-6">
+    <main className="p-6 space-y-10">
+      {/* Add New Transaction */}
       <TransactionForm />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <ExpensesChart />
-        <CategoryPieChart />
-      </div>
+      
+      {/* Monthly Expenses Bar Chart */}
+      <ExpensesChart />
+      
+      {/* List of Transactions */}
       <TransactionList />
+      
+      {/* Budget Setting Form */}
+      <BudgetForm />
+      
+      {/* Budget vs Actual Comparison */}
+      <BudgetComparison />
     </main>
   );
 }
